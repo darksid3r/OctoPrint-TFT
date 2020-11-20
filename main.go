@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mcuadros/OctoPrint-TFT/ui"
+	"github.com/darksid3r/OctoPrint-TFT/ui"
 
 	"github.com/gotk3/gotk3/gtk"
 	"gopkg.in/yaml.v1"

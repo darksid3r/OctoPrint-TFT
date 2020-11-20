@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 export DH_VERBOSE := 1
-export DH_GOPKG := github.com/mcuadros/OctoPrint-TFT
+export DH_GOPKG := github.com/darksid3r/OctoPrint-TFT
 export DH_GOLANG_INSTALL_ALL := 1
 export DH_GOLANG_EXCLUDES := vendor
 
