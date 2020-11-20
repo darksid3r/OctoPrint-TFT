@@ -13,9 +13,13 @@ GOTEST = $(GOCMD) test -v
 # Environment
 WORKDIR := $(shell pwd)
 BUILD_PATH := $(WORKDIR)/build
-DOCKER_IMAGE_BUILD = mcuadros/octoprint-tft-build
+DOCKER_IMAGE_BUILD = darksid3r/octoprint-tft-build
 
-DEBIAN_PACKAGES = JESSIE STRETCH
+DEBIAN_PACKAGES = BUSTER
+BUSTER_NAME := buster
+BUSTER_IMAGE := golang:1.11
+BUSTER_GO_TAGS := gtk_3_22
+
 STRETCH_NAME := stretch
 STRETCH_IMAGE := golang:1.9-stretch
 STRETCH_GO_TAGS := gtk_3_22
@@ -23,7 +27,6 @@ STRETCH_GO_TAGS := gtk_3_22
 JESSIE_NAME := jessie
 JESSIE_IMAGE := golang:1.8-jessie
 JESSIE_GO_TAGS := gtk_3_14
-
 
 # Build information
 GIT_COMMIT = $(shell git rev-parse HEAD | cut -c1-7)
