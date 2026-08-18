@@ -1,2 +1,11 @@
 build
-debian/changelog
+octoprint-tft-bin
+
+# debhelper/dpkg-buildpackage byproducts
+debian/.gocache/
+debian/.debhelper/
+debian/octoprint-tft/
+debian/debhelper-build-stamp
+debian/files
+debian/*.substvars
+debian/*.debhelper

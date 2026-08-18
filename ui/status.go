@@ -313,7 +313,7 @@ func ConfirmStopDialog(parent *gtk.Window, msg string, ma *statusPanel) func() {
 
 		ergebnis := win.Run()
 
-		if ergebnis == int(gtk.RESPONSE_YES) {
+		if ergebnis == gtk.RESPONSE_YES {
 
 			Logger.Warning("Stopping job")
 			if err := (&octoprint.CancelRequest{}).Do(ma.UI.Printer); err != nil {

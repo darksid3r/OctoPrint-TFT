@@ -1,31 +1,37 @@
 #!/usr/bin/make -f
 
 export DH_VERBOSE := 1
-export DH_GOPKG := github.com/mcuadros/OctoPrint-TFT
-export DH_GOLANG_INSTALL_ALL := 1
-export DH_GOLANG_EXCLUDES := vendor
+
+GOPKG := github.com/darksid3r/OctoPrint-TFT
+GO_TAGS ?= gtk_3_24
+VERSION := $(shell dpkg-parsechangelog -SVersion | sed 's/-.*//')
+BUILD_DATE := $(shell date --utc +%Y%m%d-%H:%M:%S)
+
+export GOCACHE := $(CURDIR)/debian/.gocache
 
 %:
-	dh $@ --buildsystem=golang --with=golang,systemd
+	dh $@
 
 override_dh_auto_build:
-	dh_auto_build -O--buildsystem=golang -O--no-parallel -- \
-		--tags $(GO_TAGS) \
+	go build --tags $(GO_TAGS) \
 		-ldflags "\
-			-X $(DH_GOPKG)/ui.Version=$(VERSION) \
-			-X $(DH_GOPKG)/ui.Build=$(BUILD_DATE)\
-		"
+			-X $(GOPKG)/ui.Version=$(VERSION) \
+			-X $(GOPKG)/ui.Build=$(BUILD_DATE)\
+		" \
+		-o octoprint-tft-bin .
 
-override_dh_golang:
-	# The dh_golang is used to add the Built-using field to the deb. This is only for reference.
-	# https://github.com/git-lfs/git-lfs/pull/2203/files
-	# dh_golang errors out because the go compiler used was not installed via a package. Therefore the step is skipped
-
-override_dh_install:
-	mkdir -p $(CURDIR)/debian/octoprint-tft/opt/octoprint-tft/
-	cp -r styles $(CURDIR)/debian/octoprint-tft/opt/octoprint-tft/
-	rm -rf $(CURDIR)/debian/octoprint-tft/usr/share/gocode
-	dh_install -XLICENSE
+override_dh_auto_install:
+	install -Dm755 octoprint-tft-bin debian/octoprint-tft/usr/bin/OctoPrint-TFT
+	mkdir -p debian/octoprint-tft/opt/octoprint-tft/
+	cp -r styles debian/octoprint-tft/opt/octoprint-tft/
 
 override_dh_auto_test:
-	echo "skip no tests"
+	# no tests
+
+override_dh_dwz:
+	# dwz chokes on Go's DWARF output ("Found compressed .debug_aranges
+	# section"); not useful for a single Go binary anyway.
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -f octoprint-tft-bin

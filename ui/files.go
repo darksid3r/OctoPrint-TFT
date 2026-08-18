@@ -174,7 +174,7 @@ func PrintDialog(parent *gtk.Window, msg string, pfad string, ma *filesPanel) fu
 
 		ergebnis := win.Run()
 
-		if ergebnis == int(gtk.RESPONSE_NO) {
+		if ergebnis == gtk.RESPONSE_NO {
 			ro := &octoprint.SelectFileRequest{}
 			ro.Location = octoprint.Local
 			ro.Path = pfad
@@ -185,7 +185,7 @@ func PrintDialog(parent *gtk.Window, msg string, pfad string, ma *filesPanel) fu
 				Logger.Error(err)
 				return
 			}
-		}else if ergebnis == int(gtk.RESPONSE_YES) {
+		}else if ergebnis == gtk.RESPONSE_YES {
 			rt := &octoprint.SelectFileRequest{}
 			rt.Location = octoprint.Local
 			rt.Path = pfad

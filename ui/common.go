@@ -2,7 +2,6 @@ package ui
 
 import (
 	"fmt"
-	"log"
 	"math"
 	"strings"
 	"sync"
@@ -138,10 +137,7 @@ func (t *BackgroundTask) loop() {
 }
 
 func (t *BackgroundTask) execute() {
-	_, err := glib.IdleAdd(t.task)
-	if err != nil {
-		log.Fatal("IdleAdd() failed:", err)
-	}
+	glib.IdleAdd(t.task)
 }
 
 type StepButton struct {
@@ -236,7 +232,7 @@ func MustConfirmDialog(parent *gtk.Window, msg string, cb func()) func() {
 		ctx, _ := win.GetStyleContext()
 		ctx.AddClass("dialog")
 
-		if win.Run() == int(gtk.RESPONSE_OK) {
+		if win.Run() == gtk.RESPONSE_OK {
 			cb()
 		}
 	}

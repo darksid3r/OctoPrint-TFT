@@ -1,0 +1,27 @@
+octoprint-tft (0.0~gitdbc3bc0-2) unstable; urgency=medium
+
+  * Modernize build: replace dep (Gopkg.toml/Gopkg.lock) with Go modules.
+  * Fix internal import path after forking (was still importing
+    github.com/mcuadros/OctoPrint-TFT/ui, which pulled the stale upstream
+    package instead of the local one).
+  * Bump gotk3 off its 2019 master pin to v0.6.5 (commit e7a9e823, the fix
+    for the "undefined: callback" build error in gdk/gdk_since_3_22.go);
+    update ui/ call sites for the resulting API changes (glib.IdleAdd now
+    returns one value, gtk.Dialog.Run() now returns gtk.ResponseType
+    instead of int).
+  * Pin sirupsen/logrus to v1.9.3 (later releases need Go 1.21 stdlib
+    maps/slices, newer than Bookworm's golang-go).
+  * Simplify debian/rules: drop the dh-golang/--buildsystem=golang
+    pipeline and dh-systemd (gone from Bookworm, merged into debhelper)
+    in favor of a plain `go build` override. Bump debhelper compat to 13.
+  * Point Homepage/Vcs-*/debian/watch at the darksid3r fork.
+
+ -- darksid3r <darksid3r@users.noreply.github.com>  Wed, 19 Aug 2026 00:00:00 +0000
+
+octoprint-tft (0.0~gitdbc3bc0-1) unstable; urgency=medium
+
+  * Last release built from the original mcuadros/dep-based pipeline.
+    (Historical entry reconstructed for changelog continuity — this is
+    the version that was actually installed via apt at the time.)
+
+ -- Máximo Cuadros <mcuadros@gmail.com>  Sun, 07 Apr 2019 12:58:40 +0000

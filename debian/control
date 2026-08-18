@@ -1,19 +1,15 @@
 Source: octoprint-tft
 Section: devel
 Priority: optional
-Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
-Uploaders: Máximo Cuadros <mcuadros@gmail.com>
-Build-Depends: debhelper (>= 9),
-               dh-golang,
-               dh-systemd,
+Maintainer: darksid3r <darksid3r@users.noreply.github.com>
+Build-Depends: debhelper (>= 13),
+               golang-go,
                libcairo2-dev (>= 1.14.0),
                libgtk-3-dev (>= 3.14)
-Standards-Version: 4.1.1
-Homepage: https://github.com/mcuadros/OctoPrint-TFT
-Vcs-Browser: https://anonscm.debian.org/cgit/pkg-go/packages/octoprint-tft.git
-Vcs-Git: https://anonscm.debian.org/git/pkg-go/packages/octoprint-tft.git
-XS-Go-Import-Path: github.com/mcuadros/OctoPrint-TFT
-Testsuite: autopkgtest-pkg-go
+Standards-Version: 4.6.2
+Homepage: https://github.com/darksid3r/OctoPrint-TFT
+Vcs-Browser: https://github.com/darksid3r/OctoPrint-TFT
+Vcs-Git: https://github.com/darksid3r/OctoPrint-TFT.git
 
 Package: octoprint-tft
 Architecture: any
