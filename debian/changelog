@@ -1,3 +1,17 @@
+octoprint-tft (0.0~gitdbc3bc0-4) unstable; urgency=medium
+
+  * Fix octoprint-tft.service to actually start on boot: change
+    WantedBy=graphical.target to multi-user.target. graphical.target is
+    only reached on images with a display manager; Raspberry Pi OS Lite
+    (and any headless install) boots to multi-user.target instead, so
+    graphical.target is never activated and the unit's [Install] symlink
+    never fires. The service appeared to work because it had only ever
+    been started directly (enable --now / restart), which bypasses
+    target activation -- a real reboot left it completely inactive with
+    no journal output at all.
+
+ -- darksid3r <darksid3r@users.noreply.github.com>  Wed, 19 Aug 2026 16:30:00 +0000
+
 octoprint-tft (0.0~gitdbc3bc0-3) unstable; urgency=medium
 
   * Add missing x11-xserver-utils to Depends. disablescreenblank.sh calls

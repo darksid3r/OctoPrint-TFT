@@ -14,5 +14,5 @@ TimeoutStopSec=5s
 IgnoreSIGPIPE=no
 
 [Install]
-WantedBy=graphical.target
+WantedBy=multi-user.target
 Alias=display-manager.service
