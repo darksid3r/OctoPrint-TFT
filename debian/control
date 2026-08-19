@@ -19,7 +19,8 @@ Depends: ${shlibs:Depends},
          libcairo2 (>= 1.14.0),
          libgtk-3-0 (>= 3.14),
          xserver-xorg,
-         xinit
+         xinit,
+         x11-xserver-utils
 Provides: x-display-manager
 Description: A OctoPrint touch interface for TFT touch modules based on GTK+3
  OctoPrint-TFT OctoPrint-TFT, a touch interface for TFT touch modules

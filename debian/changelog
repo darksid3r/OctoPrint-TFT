@@ -1,3 +1,16 @@
+octoprint-tft (0.0~gitdbc3bc0-3) unstable; urgency=medium
+
+  * Add missing x11-xserver-utils to Depends. disablescreenblank.sh calls
+    xset, which that package provides; without it the ExecStartPost hook
+    fails every start and systemd tears down the whole service in a loop
+    (Restart=always + RestartSec=1s), even though Xorg and OctoPrint-TFT
+    itself start and connect successfully every time -- the app's own
+    logs look completely healthy, which is what made this easy to miss.
+    Found by installing on a clean Trixie image with no desktop metapackages
+    pulled in.
+
+ -- darksid3r <darksid3r@users.noreply.github.com>  Wed, 19 Aug 2026 14:47:54 +0000
+
 octoprint-tft (0.0~gitdbc3bc0-2) unstable; urgency=medium
 
   * Modernize build: replace dep (Gopkg.toml/Gopkg.lock) with Go modules.
